@@ -50,7 +50,7 @@ public class playerMovement : MonoBehaviour
     private bool hasDoubleJumped = false;
     
 
-    //viktig information för att förstå koden:
+    //viktig information f?r att f?rst? koden:
 
     // Cherries = coins i spelet
 
@@ -58,16 +58,16 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Denna invoke gör så att spelaren inte kan röra sig förens 0.75 sekunder
-        // har gått i början av spelet.
+        // Denna invoke g?r s? att spelaren inte kan r?ra sig f?rens 0.75 sekunder
+        // har g?tt i b?rjan av spelet.
         Invoke("CanMoveAgain", 0.75f);
         //UI kod uppdaterar cherries 
         appleText.text = "" + cherriesCollected;
 
         currentHealth = startingHealth;
 
-        //Storear lite Components i variables. Använda dessa istället för att använda 
-        // Getcomponent varje gång!
+        //Storear lite Components i variables. Anv?nda dessa ist?llet f?r att anv?nda 
+        // Getcomponent varje g?ng!
         rgbd = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -81,8 +81,8 @@ public class playerMovement : MonoBehaviour
         CheckIfGrounded();
         CheckFootsteps();
 
-        //Samlar ihop spelarens inputs på horizontollen
-      horizontalValue = Input.GetAxis("Horizontal");
+        //Samlar ihop spelarens inputs p? horizontollen
+        horizontalValue = Input.GetAxis("Horizontal");
 
         //Flip sprite kod
         if (horizontalValue < 0)
@@ -109,18 +109,17 @@ public class playerMovement : MonoBehaviour
             hasDoubleJumped = true;
         }
 
-        //Animations kod för att springa, hoppa och att falla, håll utkik i animations tabben
+        //Animations kod f?r att springa, hoppa och att falla, h?ll utkik i animations tabben
         //i Unity.
         anim.SetFloat("MoveSpeed", Mathf.Abs(rgbd.velocity.x));
-        anim.SetFloat("VertialSpeed", rgbd.velocity.y);
-        anim.SetBool("IsGrounded", CheckIfGrounded());    
-        
+        anim.SetFloat("VerticalSpeed", rgbd.velocity.y);
+        anim.SetBool("IsGrounded", CheckIfGrounded());
 
         CheckIfGrounded();
 
-        //Om du är grounded har du inte double jumpat
-        //Detta betyder att när du hoppar så hoppar du normalt om du står på marken
-        //Om du står på luft så gör du en double jump!
+        //Om du ?r grounded har du inte double jumpat
+        //Detta betyder att n?r du hoppar s? hoppar du normalt om du st?r p? marken
+        //Om du st?r p? luft s? g?r du en double jump!
         if (CheckIfGrounded())
         {
             hasDoubleJumped = false;
@@ -129,6 +128,7 @@ public class playerMovement : MonoBehaviour
         CheckFootsteps();
 
         ResetPositionOnPlayerdemand();
+
     }
 
     private void ResetPositionOnPlayerdemand()
@@ -176,7 +176,7 @@ public class playerMovement : MonoBehaviour
         }
         else
         {
-            //Movement koden, Rör aldrig denna.
+            //Movement koden, R?r aldrig denna.
             rgbd.velocity = new Vector2(horizontalValue * moveSpeed * Time.deltaTime, rgbd.velocity.y);
             
 
@@ -198,7 +198,7 @@ public class playerMovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //plocka upp "cherries" alltså Coins
+        //plocka upp "cherries" allts? Coins
         if (other.CompareTag("Cherry"))
         {
             Destroy(other.gameObject);
@@ -210,7 +210,7 @@ public class playerMovement : MonoBehaviour
             Invoke("CheckCherries", 0.25f);
         }
 
-        // om du triggrar en health genom att gå in i den får du tillbaka liv.
+        // om du triggrar en health genom att g? in i den f?r du tillbaka liv.
         if (other.CompareTag("Health"))
         {
             RestoreHealth(other.gameObject);
